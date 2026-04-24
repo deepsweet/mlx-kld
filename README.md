@@ -29,6 +29,7 @@ hf download Qwen/Qwen3.6-35B-A3B
 
 # convert it into MLX
 uv tool install mlx-lm
+# add `--dtype float16` if needed
 mlx_lm.convert \
   --hf-path ~/.cache/huggingface/models/Qwen/Qwen3.6-35B-A3B \
   --mlx-path /path/to/Qwen3.6-35B-A3B-MLX
