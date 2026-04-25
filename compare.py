@@ -13,15 +13,17 @@ target_model_path = sys.argv[1]
 INPUT_LOG_PROBS_FILE = "reference.npy"
 INPUT_PROMPT_FILE = "prompt.npy"
 
+mlx.core.clear_cache()
+
+print("Loading target model...")
+target_model, target_tokenizer = mlx_lm.load(target_model_path)
+target_model_memory = mlx.core.get_active_memory()
+
 print("Loading reference log-probabilities...")
 ref_log_probs = mlx.core.array(numpy.load(INPUT_LOG_PROBS_FILE))
 
 print("Loading prompt...")
 fixed_input = mlx.core.array(numpy.load(INPUT_PROMPT_FILE))
-
-print("Loading target model...")
-target_model, target_tokenizer = mlx_lm.load(target_model_path)
-target_model_memory = mlx.core.get_active_memory()
 
 print("Calculating log-probabilities...")
 target_logits = target_model(fixed_input)

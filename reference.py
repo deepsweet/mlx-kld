@@ -25,6 +25,8 @@ def load_full_prompt(file_path, tokenizer, max_tokens):
         token_ids = token_ids[:max_tokens]
     return mlx.core.array(token_ids)[None]
 
+mlx.core.clear_cache()
+
 print("Loading reference model...")
 ref_model, ref_tokenizer = mlx_lm.load(ref_model_path)
 
