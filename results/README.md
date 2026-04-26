@@ -3,7 +3,7 @@
 - source model: [Qwen/Qwen3.6-35B-A3B](https://huggingface.co/Qwen/Qwen3.6-35B-A3B)
 - oQ sensitivity model: affine Q8 bfloat16
 - data type: float16
-- prompt: 16384 tokens of Aes Sedai's "combined_all_micro"
+- prompt: 16384 tokens of Aes Sedai's [combined_all_micro.txt](https://huggingface.co/AesSedai/GLM-4.5-GGUF/raw/main/combined_all_micro.txt)
 
 <img src="./Qwen3.6-35B-A3B.png" width="760" height="820" alt="Qwen3.6-35B-A3B KLD/RAM chart"/>
 
