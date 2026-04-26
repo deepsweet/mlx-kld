@@ -39,10 +39,12 @@ mlx_lm.convert \
 curl -sL "https://www.gutenberg.org/cache/epub/932/pg932.txt" | tail -n +42 > prompt.txt
 
 # load, calculate and save reference model log-probabilities
-uv run reference.py /path/to/Qwen3.6-35B-A3B-MLX
+# reference.py <max_tokens> <reference_model_path>
+uv run reference.py 16384 /path/to/Qwen3.6-35B-A3B-MLX
 
 # compare a target quantized model against it
-uv run compare.py /path/to/Qwen3.6-35B-A3B-MLX-oQ8
+# compare_target.py <max_tokens> <target_model_path>
+uv run compare.py 16384 /path/to/Qwen3.6-35B-A3B-MLX-oQ8
 
 # cleanup when finished
 rm prompt.npy reference.npy

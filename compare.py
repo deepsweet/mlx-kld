@@ -4,11 +4,12 @@ import mlx.nn
 import mlx_lm
 import numpy
 
-if len(sys.argv) != 2:
-    print("Usage: compare_target.py <target_model_path>")
+if len(sys.argv) != 3:
+    print("Usage: compare_target.py <max_tokens> <target_model_path>")
     sys.exit(1)
 
-target_model_path = sys.argv[1]
+max_tokens = int(sys.argv[1])
+target_model_path = sys.argv[2]
 
 INPUT_LOG_PROBS_FILE = "reference.npy"
 INPUT_PROMPT_FILE = "prompt.npy"

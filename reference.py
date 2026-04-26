@@ -4,40 +4,43 @@ import mlx.nn
 import mlx_lm
 import numpy
 
-if len(sys.argv) != 2:
-    print("Usage: reference.py <reference_model_path>")
+if len(sys.argv) != 3:
+    print("Usage: reference.py <max_tokens> <reference_model_path>")
     sys.exit(1)
 
-ref_model_path = sys.argv[1]
+max_tokens = int(sys.argv[1])
+ref_model_path = sys.argv[2]
 
-MAX_TOKENS = 8192
 INPUT_PROMPT_FILE = "prompt.txt"
 OUTPUT_LOG_PROBS_FILE = "reference.npy"
 OUTPUT_PROMPT_FILE = "prompt.npy"
 
-def load_full_prompt(file_path, tokenizer, max_tokens):
-    with open(file_path, "r", encoding="utf-8") as f:
-        text = f.read()
-
-    token_ids = tokenizer.encode(text)
-    token_len = len(token_ids)
-
-    if token_len < max_tokens:
-        raise ValueError(f"File too short: {token_len} < {max_tokens}")
-        
-    if token_len > max_tokens:
-        print(f"Truncating prompt from {token_len} to {max_tokens} tokens...")
-        token_ids = token_ids[:max_tokens]
-
-    return mlx.core.array(token_ids)[None]
-
 mlx.core.clear_cache()
 
 print("Loading reference model...")
-ref_model, ref_tokenizer = mlx_lm.load(ref_model_path)
+ref_model, ref_tokenizer, ref_config = mlx_lm.load(ref_model_path, return_config=True)
+
+ref_model_context = ref_config.get("max_position_embeddings")
+if ref_model_context is None:
+    text_config = ref_config.get("text_config", {})
+    ref_model_context = text_config.get("max_position_embeddings")
+if ref_model_context is None:
+    raise ValueError("Could not determine model maximum context length")
+
+if max_tokens > ref_model_context:
+    raise ValueError(f"Requested max_tokens {max_tokens} > model max context {ref_model_context}")
 
 print("Loading prompt...")
-fixed_input = load_full_prompt(INPUT_PROMPT_FILE, ref_tokenizer, MAX_TOKENS)
+with open(INPUT_PROMPT_FILE, "r", encoding="utf-8") as f:
+    text = f.read()
+
+token_ids = ref_tokenizer.encode(text, truncation=True, max_length=max_tokens)
+token_len = len(token_ids)
+
+if token_len < max_tokens:
+    raise ValueError(f"Prompt {token_len} < requested max_tokens {max_tokens}")
+
+fixed_input = mlx.core.array(token_ids)[None]
 
 print("Calculating log-probabilities...")
 ref_logits = ref_model(fixed_input)
