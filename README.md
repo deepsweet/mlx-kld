@@ -8,7 +8,7 @@ Set of scripts to measure KLD, made specifically for MLX format.
 
 Read ["Why Maybe We're Measuring LLM Compression Wrong"](https://huggingface.co/blog/rishiraj/kld-guided-quantization) and ["oQ: oMLX Universal Dynamic Quantization"](https://github.com/jundot/omlx/blob/main/docs/oQ_Quantization.md) for details.
 
-![Qwen3.6-35B-A3B KLD/RAM chart](./results/Qwen3.6-35B-A3B.png)
+<img src="./results/Qwen3.6-35B-A3B.png" width="760" height="820" alt="Qwen3.6-35B-A3B KLD/RAM chart"/>
 
 See [Qwen3.6-35B-A3B.ipynb](./results/Qwen3.6-35B-A3B.ipynb) for the above chart example.
 

@@ -5,7 +5,7 @@
 - data type: float16
 - prompt: 16384 tokens of Aes Sedai's "combined_all_micro"
 
-![Qwen3.6-35B-A3B KLD/RAM chart](./Qwen3.6-35B-A3B.png)
+<img src="./Qwen3.6-35B-A3B.png" width="760" height="820" alt="Qwen3.6-35B-A3B KLD/RAM chart"/>
 
 ### oQ
 
