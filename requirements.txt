@@ -1,3 +1,5 @@
 mlx>=0.20.0
 mlx-lm>=0.20.0
 numpy>=1.24.0
+plotly>=6.7.0
+kaleido>=1.2.0
