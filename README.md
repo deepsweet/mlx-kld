@@ -34,9 +34,8 @@ mlx_lm.convert \
   --hf-path ~/.cache/huggingface/models/Qwen/Qwen3.6-35B-A3B \
   --mlx-path /path/to/Qwen3.6-35B-A3B-MLX
 
-# prepare a diverse prompt at least 8192 tokens long
-# for example, "The Fall of the House of Usher" by Edgar Allan Poe would suffice
-curl -sL "https://www.gutenberg.org/cache/epub/932/pg932.txt" | tail -n +42 > prompt.txt
+# prepare a diverse prompt, Aes Sedai's "combined_all_micro" would suffice
+curl -L "https://huggingface.co/AesSedai/GLM-4.5-GGUF/raw/main/combined_all_micro.txt" > prompt.txt
 
 # load, calculate and save reference model log-probabilities
 # reference.py <max_tokens> <reference_model_path>
