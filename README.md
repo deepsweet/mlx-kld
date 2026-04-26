@@ -36,7 +36,7 @@ mlx_lm.convert \
 
 # prepare a diverse prompt at least 8192 tokens long
 # for example, "The Fall of the House of Usher" by Edgar Allan Poe would suffice
-curl -L "https://www.gutenberg.org/cache/epub/932/pg932.txt" -o prompt.txt
+curl -sL "https://www.gutenberg.org/cache/epub/932/pg932.txt" | tail -n +42 > prompt.txt
 
 # load, calculate and save reference model log-probabilities
 uv run reference.py /path/to/Qwen3.6-35B-A3B-MLX
