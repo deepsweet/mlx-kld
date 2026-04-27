@@ -4,6 +4,8 @@
 - oQ sensitivity model: affine Q8 bfloat16
 - data type: float16
 - prompt: 16384 tokens of Aes Sedai's [combined_all_micro.txt](https://huggingface.co/AesSedai/GLM-4.5-GGUF/raw/main/combined_all_micro.txt)
+- mlx-lm: v0.31.3
+- oMLX: v0.3.6
 
 ![Qwen3.6-35B-A3B KLD/RAM chart](./Qwen3.6-35B-A3B.svg)
 
