@@ -341,7 +341,7 @@ wheels = [
 [[package]]
 name = "mlx-kld"
 version = "0.0.0"
-source = { virtual = "." }
+source = { editable = "." }
 dependencies = [
     { name = "kaleido" },
     { name = "mlx" },

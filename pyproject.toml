@@ -15,7 +15,12 @@ dev = [
     "ruff>=0.15.12",
 ]
 
+[project.scripts]
+"mlx_kld.reference" = "mlx_kld.reference:main"
+"mlx_kld.compare" = "mlx_kld.compare:main"
+
 [tool.uv]
+package = true
 default-groups = []
 
 [tool.ruff]
