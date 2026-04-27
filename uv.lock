@@ -346,7 +346,6 @@ dependencies = [
     { name = "kaleido" },
     { name = "mlx" },
     { name = "mlx-lm" },
-    { name = "numpy" },
     { name = "plotly" },
 ]
 
@@ -360,7 +359,6 @@ requires-dist = [
     { name = "kaleido", specifier = ">=1.2.0" },
     { name = "mlx", specifier = ">=0.31.2" },
     { name = "mlx-lm", specifier = ">=0.31.3" },
-    { name = "numpy", specifier = ">=2.4.4" },
     { name = "plotly", specifier = ">=6.7.0" },
 ]
 

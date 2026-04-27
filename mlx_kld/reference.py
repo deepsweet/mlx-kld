@@ -3,7 +3,6 @@ import sys
 import mlx.core
 import mlx.nn
 import mlx_lm
-import numpy
 
 
 def main():
@@ -50,15 +49,8 @@ def main():
     ref_log_probs = mlx.nn.log_softmax(ref_logits, axis=-1)
 
     print("Saving artifacts...")
-    if ref_log_probs.dtype == mlx.core.bfloat16:
-        ref_log_probs_arr = numpy.array(ref_log_probs.astype(mlx.core.float32))
-    else:
-        ref_log_probs_arr = numpy.array(ref_log_probs)
-
-    fixed_input_arr = numpy.array(fixed_input)
-
-    numpy.save(OUTPUT_LOG_PROBS_FILE, ref_log_probs_arr)
-    numpy.save(OUTPUT_PROMPT_FILE, fixed_input_arr)
+    mlx.core.save(OUTPUT_LOG_PROBS_FILE, ref_log_probs)
+    mlx.core.save(OUTPUT_PROMPT_FILE, fixed_input)
 
 if __name__ == "__main__":
     main()

@@ -3,7 +3,6 @@ import sys
 import mlx.core
 import mlx.nn
 import mlx_lm
-import numpy
 
 
 def main():
@@ -23,10 +22,10 @@ def main():
     target_model_memory = mlx.core.get_active_memory()
 
     print("Loading reference log-probabilities...")
-    ref_log_probs = mlx.core.array(numpy.load(INPUT_LOG_PROBS_FILE))
+    ref_log_probs = mlx.core.load(INPUT_LOG_PROBS_FILE)
 
     print("Loading prompt...")
-    fixed_input = mlx.core.array(numpy.load(INPUT_PROMPT_FILE))
+    fixed_input = mlx.core.load(INPUT_PROMPT_FILE)
 
     print("Calculating log-probabilities...")
     target_logits = target_model(fixed_input)
