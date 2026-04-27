@@ -44,7 +44,7 @@ uv run mlx_kld.reference /path/to/Qwen3.6-35B-A3B-MLX 16384
 uv run mlx_kld.compare /path/to/Qwen3.6-35B-A3B-MLX-oQ8
 
 # cleanup when finished
-rm prompt.npy reference.npy
+rm *.npy
 ```
 
 ## Generate chart

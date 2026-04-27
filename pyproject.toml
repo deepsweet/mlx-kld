@@ -86,3 +86,6 @@ exclude = [
     ".vscode",
     ".git",
 ]
+
+[tool.ruff.lint.isort]
+force-single-line = true
