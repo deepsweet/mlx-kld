@@ -2,6 +2,7 @@
 
 - source model: [Qwen/Qwen3.6-35B-A3B](https://huggingface.co/Qwen/Qwen3.6-35B-A3B)
 - oQ sensitivity model: affine Q8 bfloat16
+- text-only: yes, VL stripepd out
 - data type: float16
 - prompt: 16384 tokens of Aes Sedai's [combined_all_micro.txt](https://huggingface.co/AesSedai/GLM-4.5-GGUF/raw/main/combined_all_micro.txt)
 - mlx-lm: v0.31.3
