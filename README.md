@@ -36,11 +36,11 @@ uv run mlx_lm.convert \
 curl -L "https://huggingface.co/AesSedai/GLM-4.5-GGUF/raw/main/combined_all_micro.txt" > prompt.txt
 
 # load, calculate and save reference model log-probabilities
-# reference.py <reference_model_path> <max_tokens>
+# mlx_kld.reference <reference_model_path> <max_tokens>
 uv run mlx_kld.reference /path/to/Qwen3.6-35B-A3B-MLX 16384
 
 # compare a target quantized model against it
-# compare_target.py <target_model_path>
+# mlx_kld.compare <target_model_path>
 uv run mlx_kld.compare /path/to/Qwen3.6-35B-A3B-MLX-oQ8
 
 # cleanup when finished
