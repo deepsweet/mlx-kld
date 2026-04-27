@@ -20,17 +20,15 @@ git clone git@github.com:deepsweet/mlx-kld.git
 cd mlx-kld/
 
 # install dependencies
-uv venv
-uv pip install -r requirements.txt
+uv sync
 
 # download an original reference model
 uv tool install huggingface-hub
 hf download Qwen/Qwen3.6-35B-A3B
 
 # convert it into MLX
-uv tool install mlx-lm
 # add `--dtype float16` if needed
-mlx_lm.convert \
+uv run mlx_lm.convert \
   --hf-path ~/.cache/huggingface/models/Qwen/Qwen3.6-35B-A3B \
   --mlx-path /path/to/Qwen3.6-35B-A3B-MLX
 
@@ -53,4 +51,11 @@ rm prompt.npy reference.npy
 
 ```sh
 uv run results/Qwen3.6-35B-A3B.py
+```
+
+## Lint
+
+```sh
+uv sync --group dev
+uv run ruff check .
 ```

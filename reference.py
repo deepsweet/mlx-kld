@@ -1,4 +1,5 @@
 import sys
+
 import mlx.core
 import mlx.nn
 import mlx_lm
@@ -31,7 +32,7 @@ if max_tokens > ref_model_context:
     raise ValueError(f"Requested max_tokens {max_tokens} > model max context {ref_model_context}")
 
 print("Loading prompt...")
-with open(INPUT_PROMPT_FILE, "r", encoding="utf-8") as f:
+with open(INPUT_PROMPT_FILE, encoding="utf-8") as f:
     text = f.read()
 
 token_ids = ref_tokenizer.encode(text, truncation=True, max_length=max_tokens)

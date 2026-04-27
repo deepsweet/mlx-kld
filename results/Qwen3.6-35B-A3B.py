@@ -28,11 +28,11 @@ margin_top = 50
 margin_bottom = 0
 dx_minor = 1
 dy_minor = 0.01
-color_oq = '#1f77b4'
-color_q = '#000000'
-color_text = '#000000'
-color_grid_major = '#d3d3d3'
-color_grid_minor = '#f5f5f5'
+color_oq = "#1f77b4"
+color_q = "#000000"
+color_text = "#000000"
+color_grid_major = "#d3d3d3"
+color_grid_minor = "#f5f5f5"
 
 def extract(data):
     ram = [d["ram"] for d in data]
@@ -51,8 +51,8 @@ fig = plotly.graph_objects.Figure()
 scatter_markers_oq = plotly.graph_objects.Scatter(
     x=ram_oq,
     y=kld_oq,
-    mode='markers',
-    name='oQ',
+    mode="markers",
+    name="oQ",
     marker=dict(color=color_oq, size=8)
 )
 fig.add_trace(scatter_markers_oq)
@@ -60,8 +60,8 @@ fig.add_trace(scatter_markers_oq)
 scatter_markers_q = plotly.graph_objects.Scatter(
     x=ram_q,
     y=kld_q,
-    mode='markers',
-    name='Q',
+    mode="markers",
+    name="Q",
     marker=dict(color=color_q, size=8)
 )
 fig.add_trace(scatter_markers_q)
@@ -69,8 +69,8 @@ fig.add_trace(scatter_markers_q)
 scatter_labels_oq = plotly.graph_objects.Scatter(
     x=x_oq_text,
     y=y_oq_text,
-    mode='text',
-    name='oQ_labels',
+    mode="text",
+    name="oQ_labels",
     text=labels_oq,
     textposition=pos_oq,
     textfont=dict(color=color_oq, size=14),
@@ -81,8 +81,8 @@ fig.add_trace(scatter_labels_oq)
 scatter_labels_q = plotly.graph_objects.Scatter(
     x=x_q_text,
     y=y_q_text,
-    mode='text',
-    name='Q_labels',
+    mode="text",
+    name="Q_labels",
     text=labels_q,
     textposition=pos_q,
     textfont=dict(color=color_q, size=14),
@@ -129,8 +129,8 @@ fig.update_layout(
             gridwidth=0.5
         ),
     ),
-    plot_bgcolor='white',
-    paper_bgcolor='white',
+    plot_bgcolor="white",
+    paper_bgcolor="white",
     margin=dict(t=margin_top, b=0, l=0, r=0)
 )
 
