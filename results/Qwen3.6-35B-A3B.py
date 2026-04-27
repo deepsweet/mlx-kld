@@ -25,7 +25,6 @@ x_min, x_max = 10, 36
 y_min, y_max = 0, 0.3
 height = 800
 margin_top = 50
-margin_bottom = 0
 dx_minor = 1
 dy_minor = 0.01
 color_oq = "#1f77b4"
