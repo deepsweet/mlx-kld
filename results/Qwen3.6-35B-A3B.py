@@ -52,7 +52,7 @@ scatter_markers_oq = plotly.graph_objects.Scatter(
     y=kld_oq,
     mode="markers",
     name="oQ",
-    marker=dict(color=color_oq, size=8)
+    marker={"color": color_oq, "size": 8},
 )
 fig.add_trace(scatter_markers_oq)
 
@@ -61,7 +61,7 @@ scatter_markers_q = plotly.graph_objects.Scatter(
     y=kld_q,
     mode="markers",
     name="Q",
-    marker=dict(color=color_q, size=8)
+    marker={"color": color_q, "size": 8},
 )
 fig.add_trace(scatter_markers_q)
 
@@ -72,8 +72,8 @@ scatter_labels_oq = plotly.graph_objects.Scatter(
     name="oQ_labels",
     text=labels_oq,
     textposition=pos_oq,
-    textfont=dict(color=color_oq, size=14),
-    showlegend=False
+    textfont={"color": color_oq, "size": 14},
+    showlegend=False,
 )
 fig.add_trace(scatter_labels_oq)
 
@@ -84,8 +84,8 @@ scatter_labels_q = plotly.graph_objects.Scatter(
     name="Q_labels",
     text=labels_q,
     textposition=pos_q,
-    textfont=dict(color=color_q, size=14),
-    showlegend=False
+    textfont={"color": color_q, "size": 14},
+    showlegend=False,
 )
 fig.add_trace(scatter_labels_q)
 
@@ -99,38 +99,43 @@ fig.update_layout(
     width=width,
     height=height,
     showlegend=False,
-    font=dict(color=color_text),
+    font={"color": color_text},
     xaxis_title="RAM (GiB)",
     yaxis_title="KL Divergence (nats)",
-    yaxis=dict(
-        range=[y_min, y_max],
-        showgrid=True,
-        gridcolor=color_grid_major,
-        ticklabelposition="outside",
-        ticklabelstandoff=10,
-        minor=dict(
-            showgrid=True,
-            dtick=dy_minor,
-            gridcolor=color_grid_minor,
-            gridwidth=0.5
-        ),
-    ),
-    xaxis=dict(
-        range=[x_min, x_max],
-        showgrid=True,
-        gridcolor=color_grid_major,
-        ticklabelposition="outside",
-        ticklabelstandoff=10,
-        minor=dict(
-            showgrid=True,
-            dtick=dx_minor,
-            gridcolor=color_grid_minor,
-            gridwidth=0.5
-        ),
-    ),
+    yaxis={
+        "range": [y_min, y_max],
+        "showgrid": True,
+        "gridcolor": color_grid_major,
+        "ticklabelposition": "outside",
+        "ticklabelstandoff": 10,
+        "minor": {
+            "showgrid": True,
+            "dtick": dy_minor,
+            "gridcolor": color_grid_minor,
+            "gridwidth": 0.5,
+        },
+    },
+    xaxis={
+        "range": [x_min, x_max],
+        "showgrid": True,
+        "gridcolor": color_grid_major,
+        "ticklabelposition": "outside",
+        "ticklabelstandoff": 10,
+        "minor": {
+            "showgrid": True,
+            "dtick": dx_minor,
+            "gridcolor": color_grid_minor,
+            "gridwidth": 0.5,
+        },
+    },
     plot_bgcolor="white",
     paper_bgcolor="white",
-    margin=dict(t=margin_top, b=0, l=0, r=0)
+    margin={
+        "t": margin_top,
+        "b": 0,
+        "l": 0,
+        "r": 0,
+    },
 )
 
 # fig.show()

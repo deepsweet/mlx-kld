@@ -28,25 +28,59 @@ default-groups = []
 [tool.ruff]
 line-length = 100
 target-version = "py312"
+unsafe-fixes = true
 
 [tool.ruff.lint]
+# https://docs.astral.sh/ruff/rules/
 select = [
     # flake8-quotes
     "Q",
     # pycodestyle
     "E",
+    # pycodestyle
+    "W",
     # Pyflakes
     "F",
-    # pyupgrade
-    "UP",
     # flake8-bugbear
     "B",
-    # flake8-simplify
-    "SIM",
+    # flake8-logging-format
+    "G",
     # isort
     "I",
+    # pep8-naming
+    "N",
+    # ruff
+    "RUF",
+    # flake8-unused-arguments
+    "ARG",
+    # flake8-simplify
+    "SIM",
+    # flake8-pyi
+    "PYI",
+    # flake8-pie
+    "PIE",
+    # flake8-return
+    "RET",
+    # flake8-import-conventions
+    "ICN",
+    # flake8-commas
+    "COM",
+    # flake8-use-pathlib
+    # "PTH",
+    # flake8-commas
+    "C4",
+    # Perflint
+    "PERF",
+    # Pylint
+    "PL",
+    # Warning
+    "PLW",
+    # pyupgrade
+    "UP",
+    # refurb
+    "FURB"
 ]
-ignore = []
+ignore = ["PLR2004"]
 exclude = [
     ".venv",
     ".vscode",

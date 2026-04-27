@@ -4,6 +4,9 @@ import mlx.core
 import mlx.nn
 import mlx_lm
 
+INPUT_LOG_PROBS_FILE = "reference.npy"
+INPUT_PROMPT_FILE = "prompt.npy"
+
 
 def main():
     if len(sys.argv) != 2:
@@ -12,13 +15,10 @@ def main():
 
     target_model_path = sys.argv[1]
 
-    INPUT_LOG_PROBS_FILE = "reference.npy"
-    INPUT_PROMPT_FILE = "prompt.npy"
-
     mlx.core.clear_cache()
 
     print("Loading target model...")
-    target_model, target_tokenizer = mlx_lm.load(target_model_path)
+    target_model = mlx_lm.load(target_model_path)
     target_model_memory = mlx.core.get_active_memory()
 
     print("Loading reference log-probabilities...")

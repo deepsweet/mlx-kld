@@ -4,6 +4,9 @@ import mlx.core
 import mlx.nn
 import mlx_lm
 
+INPUT_PROMPT_FILE = "prompt.txt"
+OUTPUT_LOG_PROBS_FILE = "reference.npy"
+OUTPUT_PROMPT_FILE = "prompt.npy"
 
 def main():
     if len(sys.argv) != 3:
@@ -12,10 +15,6 @@ def main():
 
     ref_model_path = sys.argv[1]
     max_tokens = int(sys.argv[2])
-
-    INPUT_PROMPT_FILE = "prompt.txt"
-    OUTPUT_LOG_PROBS_FILE = "reference.npy"
-    OUTPUT_PROMPT_FILE = "prompt.npy"
 
     mlx.core.clear_cache()
 
