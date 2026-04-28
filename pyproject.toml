@@ -80,7 +80,16 @@ select = [
     # refurb
     "FURB"
 ]
-ignore = ["PLR2004"]
+ignore = [
+  # magic-value-comparison
+  "PLR2004"
+]
+unfixable = [
+  # unused-import
+  "F401",
+  # unused-variable
+  "F841",
+]
 exclude = [
     ".venv",
     ".vscode",
