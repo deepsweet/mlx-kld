@@ -1,3 +1,4 @@
+import statistics
 import sys
 
 import mlx.core
@@ -31,9 +32,15 @@ def main():
     target_log_probs = mlx.nn.log_softmax(target_logits, axis=-1)
 
     print("Calculating KL Divergence...")
-    kld = mlx.nn.losses.kl_div_loss(target_log_probs, ref_log_probs, reduction="mean").item()
+    kld_none = mlx.nn.losses.kl_div_loss(target_log_probs, ref_log_probs, reduction="none")
+    kld_mean = mlx.core.mean(kld_none).item()
+    kld_list = kld_none.flatten().tolist()
+    kld_p95 = statistics.quantiles(kld_list, n=100)[-5]
+    kld_p99 = statistics.quantiles(kld_list, n=100)[-1]
 
-    print(f"\nKLD: {kld:.6f}")
+    print(f"\nKLD mean: {kld_mean:.6f}")
+    print(f"KLD p95: {kld_p95:.6f}")
+    print(f"KLD p99: {kld_p99:.6f}")
 
     target_model_memory_gib = target_memory / (1024**3)
     print(f"RAM: {target_model_memory_gib:.2f}")
