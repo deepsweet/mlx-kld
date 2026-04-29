@@ -31,6 +31,9 @@ def main():
     target_logits = target_model(prompt)
     target_log_probs = mlx.nn.log_softmax(target_logits, axis=-1)
 
+    del target_model
+    mlx.core.clear_cache()
+
     print("Calculating KL Divergence...")
     kld_none = mlx.nn.losses.kl_div_loss(target_log_probs, ref_log_probs, reduction="none")
     kld_mean = mlx.core.mean(kld_none).item()

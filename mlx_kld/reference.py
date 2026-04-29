@@ -47,6 +47,9 @@ def main():
     ref_logits = ref_model(prompt)
     ref_log_probs = mlx.nn.log_softmax(ref_logits, axis=-1)
 
+    del ref_model
+    mlx.core.clear_cache()
+
     print("Saving artifacts...")
     mlx.core.save(const.LOGPROBS_FILE, ref_log_probs)
     mlx.core.save(const.TOKENIZED_PROMPT_FILE, prompt)
