@@ -82,7 +82,9 @@ select = [
 ]
 ignore = [
   # magic-value-comparison
-  "PLR2004"
+  "PLR2004",
+  # flake8-import-conventions
+  "ICN001"
 ]
 unfixable = [
   # unused-import
