@@ -6,7 +6,7 @@
 - data type: bfloat16
 - context: single 16384-token prompt using Aes Sedai's [combined_all_micro.txt](https://huggingface.co/AesSedai/GLM-4.5-GGUF/raw/main/combined_all_micro.txt)
 
-![Qwen3.6-35B-A3B KLD/RAM chart](./Qwen3.6-35B-A3B.svg)
+![Qwen3.6-35B-A3B KLD/RAM chart](./Qwen3.6-35B-A3B.svg?20250429)
 
 ### oQ
 
