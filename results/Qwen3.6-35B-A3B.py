@@ -45,20 +45,23 @@ datasets = [
 ]
 
 x_min = 10
-x_max = 36
+x_max = 40
 y_min = 0
 y_max = 0.3
+x_step_fixed = 5
+y_step_fixed = 0.05
+num_intervals = 5
+minor_subdivisions = 5
 height = 800
-margin_top = 70
-margin_bottom = 70
+margin_top = 75
+margin_bottom = 75
 margin_left = 80
-margin_right = 10
-dx_minor = 1
-dy_minor = 0.01
+margin_right = 16
 default_text_pos = "top right"
 default_text_x = 0.0
 default_text_y = 0.0025
 color_text = "#000000"
+color_border = "#000000"
 color_grid_major = "#d3d3d3"
 color_grid_minor = "#f5f5f5"
 
@@ -102,6 +105,9 @@ for dataset in datasets:
     )
     fig.add_trace(label)
 
+
+dx_minor = x_step_fixed / minor_subdivisions
+dy_minor = y_step_fixed / minor_subdivisions
 x_range = x_max - x_min
 y_range = y_max - y_min
 inner_height = height - margin_top - margin_bottom
@@ -118,8 +124,14 @@ fig.update_layout(
     xaxis_title="RAM (GiB)",
     yaxis_title="KL Divergence (mean, nats)",
     yaxis={
+        "showline": True,
+        "mirror": True,
+        "linecolor": color_border,
+        "linewidth": 1,
         "range": [y_min, y_max],
         "showgrid": True,
+        "dtick": y_step_fixed,
+        "tick0": y_min,
         "gridcolor": color_grid_major,
         "ticklabelposition": "outside",
         "ticklabelstandoff": 10,
@@ -131,8 +143,14 @@ fig.update_layout(
         },
     },
     xaxis={
+        "showline": True,
+        "mirror": True,
+        "linecolor": color_border,
+        "linewidth": 1,
         "range": [x_min, x_max],
         "showgrid": True,
+        "dtick": x_step_fixed,
+        "tick0": x_min,
         "gridcolor": color_grid_major,
         "ticklabelposition": "outside",
         "ticklabelstandoff": 10,
