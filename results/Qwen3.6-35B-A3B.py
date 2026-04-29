@@ -1,97 +1,112 @@
 import plotly.graph_objects
 
-oq_data = [
-    {"ram": 11.40, "kld": 0.246338, "label": "oQ2"},
-    {"ram": 14.96, "kld": 0.134155, "label": "oQ3"},
-    {"ram": 16.17, "kld": 0.126221, "label": "oQ3.5"},
-    {"ram": 18.98, "kld": 0.016815, "label": "oQ4"},
-    {"ram": 22.76, "kld": 0.008270, "label": "oQ5"},
-    {"ram": 26.51, "kld": 0.006718, "label": "oQ6"},
-    {"ram": 34.27, "kld": 0.002277, "label": "oQ8"},
+datasets = [
+    {
+        "name": "oQ",
+        "color": "#4c72b0",
+        "data": [
+            { "label": "oQ2", "kld": 0.277344, "ram": 11.40 },
+            { "label": "oQ3", "kld": 0.175781, "ram": 14.77 },
+            { "label": "oQ3.5", "kld": 0.170898, "ram": 16.00 },
+            { "label": "oQ4", "kld": 0.028076, "ram": 18.83 },
+            { "label": "oQ5", "kld": 0.010254, "ram": 22.76 },
+            { "label": "oQ6", "kld": 0.008057, "ram": 26.51 },
+            { "label": "oQ8", "kld": 0.005219, "ram": 34.27 },
+        ],
+    },
+    {
+        "name": "Q",
+        "color": "#dd8452",
+        "data": [
+            { "label": "Q2", "kld": 3.093750, "ram": 10.10 },
+            { "label": "Q3", "kld": 0.230469, "ram": 14.14 },
+            { "label": "Q4", "kld": 0.062500, "ram": 18.17 },
+            { "label": "Q5", "kld": 0.019531, "ram": 22.20 },
+            { "label": "Q6", "kld": 0.009094, "ram": 26.23, "pos": "top left" },
+            { "label": "Q8", "kld": 0.005402, "ram": 34.30, "pos": "top left", "x": -0.15 },
+        ],
+    },
+    {
+        "name": "MXFP",
+        "color": "#8c6bb1",
+        "data": [
+            { "label": "MXFP4", "kld": 0.111328, "ram": 17.16 },
+            { "label": "MXFP8", "kld": 0.041992, "ram": 33.29 },
+        ],
+    },
+    {
+        "name": "UD",
+        "color": "#55a868",
+        "data": [
+            { "label": "UD3", "kld": 0.048584, "ram": 15.35 },
+            { "label": "UD4", "kld": 0.016357, "ram": 19.32 },
+        ],
+    },
 ]
 
-q_data = [
-    {"ram": 10.10, "kld": 3.042969, "label": "Q2"},
-    {"ram": 14.14, "kld": 0.206299, "label": "Q3"},
-    {"ram": 18.17, "kld": 0.054230, "label": "Q4"},
-    {"ram": 22.20, "kld": 0.015419, "label": "Q5", "pos": "top left"},
-    {"ram": 26.23, "kld": 0.007050, "label": "Q6", "pos": "top left"},
-    {"ram": 34.30, "kld": 0.000926, "label": "Q8", "pos": "top left", "x": -0.15},
-    {"ram": 17.16, "kld": 0.097501, "label": "MXFP4"},
-    {"ram": 33.29, "kld": 0.038293, "label": "MXFP8"},
-]
-
-x_min, x_max = 10, 36
-y_min, y_max = 0, 0.3
+x_min = 10
+x_max = 36
+y_min = 0
+y_max = 0.3
 height = 800
-margin_top = 50
+margin_top = 70
+margin_bottom = 70
+margin_left = 80
+margin_right = 10
 dx_minor = 1
 dy_minor = 0.01
-color_oq = "#1f77b4"
-color_q = "#000000"
+default_text_pos = "top right"
+default_text_x = 0.0
+default_text_y = 0.0025
 color_text = "#000000"
 color_grid_major = "#d3d3d3"
 color_grid_minor = "#f5f5f5"
 
-def extract(data):
-    ram = [d["ram"] for d in data]
-    kld = [d["kld"] for d in data]
-    labels = [d["label"] for d in data]
-    textpos = [d.get("pos", "top right") for d in data]
-    x_text = [d["ram"] + d.get("x", 0) for d in data]
-    y_text = [d["kld"] + d.get("y", 0.0025) for d in data]
-    return ram, kld, labels, textpos, x_text, y_text
-
-ram_oq, kld_oq, labels_oq, pos_oq, x_oq_text, y_oq_text = extract(oq_data)
-ram_q,  kld_q,  labels_q,  pos_q,  x_q_text,  y_q_text  = extract(q_data)
-
 fig = plotly.graph_objects.Figure()
 
-scatter_markers_oq = plotly.graph_objects.Scatter(
-    x=ram_oq,
-    y=kld_oq,
-    mode="markers",
-    name="oQ",
-    marker={"color": color_oq, "size": 8},
-)
-fig.add_trace(scatter_markers_oq)
+for dataset in datasets:
+    name = dataset["name"]
+    color = dataset["color"]
+    label = []
+    kld = []
+    ram = []
+    text_pos = []
+    text_x = []
+    text_y = []
 
-scatter_markers_q = plotly.graph_objects.Scatter(
-    x=ram_q,
-    y=kld_q,
-    mode="markers",
-    name="Q",
-    marker={"color": color_q, "size": 8},
-)
-fig.add_trace(scatter_markers_q)
+    for d in dataset["data"]:
+        ram.append(d["ram"])
+        kld.append(d["kld"])
+        label.append(d["label"])
+        text_pos.append(d.get("pos", default_text_pos))
+        text_x.append(d["ram"] + d.get("x", default_text_x))
+        text_y.append(d["kld"] + d.get("y", default_text_y))
 
-scatter_labels_oq = plotly.graph_objects.Scatter(
-    x=x_oq_text,
-    y=y_oq_text,
-    mode="text",
-    name="oQ_labels",
-    text=labels_oq,
-    textposition=pos_oq,
-    textfont={"color": color_oq, "size": 14},
-    showlegend=False,
-)
-fig.add_trace(scatter_labels_oq)
+    marker = plotly.graph_objects.Scatter(
+        x=ram,
+        y=kld,
+        mode="markers",
+        name=f"{name}_marker",
+        marker={"color": color, "size": 8},
+    )
+    fig.add_trace(marker)
 
-scatter_labels_q = plotly.graph_objects.Scatter(
-    x=x_q_text,
-    y=y_q_text,
-    mode="text",
-    name="Q_labels",
-    text=labels_q,
-    textposition=pos_q,
-    textfont={"color": color_q, "size": 14},
-    showlegend=False,
-)
-fig.add_trace(scatter_labels_q)
+    label = plotly.graph_objects.Scatter(
+        x=text_x,
+        y=text_y,
+        mode="text",
+        name=f"{name}_label",
+        text=label,
+        textposition=text_pos,
+        textfont={"color": color, "size": 14},
+    )
+    fig.add_trace(label)
 
 x_range = x_max - x_min
 y_range = y_max - y_min
-width = (height - margin_top) * (x_range / dx_minor) / (y_range / dy_minor)
+inner_height = height - margin_top - margin_bottom
+inner_width = inner_height * (x_range / dx_minor) / (y_range / dy_minor)
+width = inner_width + margin_left + margin_right
 
 fig.update_layout(
     title="Qwen3.6-35B-A3B",
@@ -101,7 +116,7 @@ fig.update_layout(
     showlegend=False,
     font={"color": color_text},
     xaxis_title="RAM (GiB)",
-    yaxis_title="KL Divergence (nats)",
+    yaxis_title="KL Divergence (mean, nats)",
     yaxis={
         "range": [y_min, y_max],
         "showgrid": True,
@@ -128,13 +143,13 @@ fig.update_layout(
             "gridwidth": 0.5,
         },
     },
-    plot_bgcolor="white",
-    paper_bgcolor="white",
+    plot_bgcolor="#ffffff",
+    paper_bgcolor="#ffffff",
     margin={
         "t": margin_top,
-        "b": 0,
-        "l": 0,
-        "r": 0,
+        "b": margin_bottom,
+        "l": margin_left,
+        "r": margin_right,
     },
 )
 
