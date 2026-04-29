@@ -26,9 +26,15 @@ uv sync
 uv tool install huggingface-hub
 hf download Qwen/Qwen3.6-35B-A3B
 
-# convert it into MLX
-# add `--dtype float16` if needed
-uv run mlx_lm.convert \
+# convert it into MLX, add `--dtype float16` if needed
+# either text-only:
+uv tool install mlx-lm
+mlx_lm.convert \
+  --hf-path ~/.cache/huggingface/models/Qwen/Qwen3.6-35B-A3B \
+  --mlx-path /path/to/Qwen3.6-35B-A3B-MLX
+# or multimodal:
+uv tool install mlx-vlm --with torchvision
+mlx_vlm.convert \
   --hf-path ~/.cache/huggingface/models/Qwen/Qwen3.6-35B-A3B \
   --mlx-path /path/to/Qwen3.6-35B-A3B-MLX
 
