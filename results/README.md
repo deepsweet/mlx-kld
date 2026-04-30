@@ -1,6 +1,6 @@
 ## Qwen3.6-35B-A3B
 
-![Qwen3.6-35B-A3B KLD/RAM chart](./Qwen3.6-35B-A3B.svg?20250429)
+![Qwen3.6-35B-A3B KLD/RAM chart](./Qwen3.6-35B-A3B.svg?20250430)
 
 ### Reference
 
