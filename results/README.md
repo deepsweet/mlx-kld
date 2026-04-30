@@ -1,12 +1,14 @@
 ## Qwen3.6-35B-A3B
 
-- reference model: [Qwen/Qwen3.6-35B-A3B](https://huggingface.co/Qwen/Qwen3.6-35B-A3B)
+![Qwen3.6-35B-A3B KLD/RAM chart](./Qwen3.6-35B-A3B.svg?20250429)
+
+### Reference
+
+- model: [Qwen/Qwen3.6-35B-A3B](https://huggingface.co/Qwen/Qwen3.6-35B-A3B)
 - tool: [mlx-vlm](https://github.com/Blaizzy/mlx-vlm) v0.4.4
 - multimodal: Vision-Language
 - data type: bfloat16
 - context: single 16384-token prompt using Aes Sedai's [combined_all_micro.txt](https://huggingface.co/AesSedai/GLM-4.5-GGUF/raw/main/combined_all_micro.txt)
-
-![Qwen3.6-35B-A3B KLD/RAM chart](./Qwen3.6-35B-A3B.svg?20250429)
 
 ### oQ
 
