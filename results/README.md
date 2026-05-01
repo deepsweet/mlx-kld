@@ -1,4 +1,4 @@
-# Results
+# KLD and PPL evaluation of various MLX quantizations
 
 >Quantization aims to reduce the precision of a model's parameter from higher bit-widths to lower bit-widths.
 
