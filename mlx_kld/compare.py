@@ -40,7 +40,7 @@ def main():
     # convert logits to numerically stable log-probabilities along the vocabulary axis
     target_log_probs = mlx.nn.log_softmax(target_logits, axis=-1)
 
-    print("Calculating KL Divergence...")
+    print("Calculating KL divergence...")
     # per-token KL Divergence summed over vocabulary (batch_size, max_tokens)
     kld_none = mlx.nn.losses.kl_div_loss(target_log_probs, ref_log_probs, reduction="none")
     kld_mean = mlx.core.mean(kld_none).item()
