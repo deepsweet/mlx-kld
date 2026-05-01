@@ -124,7 +124,7 @@ fig.update_layout(
     showlegend=False,
     font={"color": color_text},
     xaxis_title="RAM (GiB)",
-    yaxis_title="KL Divergence (mean, nats)",
+    yaxis_title="KL divergence (mean, nats)",
     yaxis={
         "showline": True,
         "mirror": True,
