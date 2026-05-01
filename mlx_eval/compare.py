@@ -10,7 +10,7 @@ from . import const
 
 def main():
     if len(sys.argv) != 2:
-        print("Usage: compare_target.py <target_model_path>")
+        print("Usage: mlx_eval.compare <target_model_path>")
         sys.exit(1)
 
     target_model_path = sys.argv[1]

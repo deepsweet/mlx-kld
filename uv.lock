@@ -339,7 +339,7 @@ wheels = [
 ]
 
 [[package]]
-name = "mlx-kld"
+name = "mlx-eval"
 version = "0.0.0"
 source = { editable = "." }
 dependencies = [

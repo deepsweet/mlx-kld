@@ -9,7 +9,7 @@ from . import const
 
 def main():
     if len(sys.argv) != 3:
-        print("Usage: reference.py <reference_model_path> <max_tokens>")
+        print("Usage: mlx_eval.reference <reference_model_path> <max_tokens>")
         sys.exit(1)
 
     ref_model_path = sys.argv[1]

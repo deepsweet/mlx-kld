@@ -1,5 +1,5 @@
 [project]
-name = "mlx-kld"
+name = "mlx-eval"
 version = "0.0.0"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -15,11 +15,11 @@ dev = [
 ]
 
 [tool.setuptools]
-packages = ["mlx_kld"]
+packages = ["mlx_eval"]
 
 [project.scripts]
-"mlx_kld.reference" = "mlx_kld.reference:main"
-"mlx_kld.compare" = "mlx_kld.compare:main"
+"mlx_eval.reference" = "mlx_eval.reference:main"
+"mlx_eval.compare" = "mlx_eval.compare:main"
 
 [tool.uv]
 package = true

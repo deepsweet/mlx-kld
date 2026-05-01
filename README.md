@@ -1,14 +1,8 @@
-# MLX KLD
+# mlx-eval
 
-Set of scripts to measure KLD, made specifically for MLX format.
+Utilities to evaluate KL divergence and perplexity of MLX quantizations.
 
-## Kullback-Leibler (KL) Divergence
-
->KLD measures the "distance" between two probability distributions. It doesn't just look at one token; it compares the entire vector of probabilities from the original model to the quantized model. It asks, "How much information is lost when we use the quantized distribution to approximate the original one?"
-
-Read ["Why Maybe We're Measuring LLM Compression Wrong"](https://huggingface.co/blog/rishiraj/kld-guided-quantization) and ["oQ: oMLX Universal Dynamic Quantization"](https://github.com/jundot/omlx/blob/main/docs/oQ_Quantization.md) for details.
-
-See [results](./results):
+See [detailed results](./results) for more information:
 
 ![Qwen3.6-35B-A3B KLD/RAM chart](./results/Qwen3.6-35B-A3B.svg?20250430)
 
@@ -16,8 +10,8 @@ See [results](./results):
 
 ```sh
 # clone the repo
-git clone git@github.com:deepsweet/mlx-kld.git
-cd mlx-kld/
+git clone git@github.com:deepsweet/mlx-eval.git
+cd mlx-eval/
 
 # install dependencies
 uv sync
@@ -42,12 +36,12 @@ mlx_vlm.convert \
 curl -L "https://huggingface.co/AesSedai/GLM-4.5-GGUF/raw/main/combined_all_micro.txt" > prompt.txt
 
 # load, calculate and save reference model log-probabilities
-# mlx_kld.reference <reference_model_path> <max_tokens>
-uv run mlx_kld.reference /path/to/Qwen3.6-35B-A3B-MLX 16384
+# mlx_eval.reference <reference_model_path> <max_tokens>
+uv run mlx_eval.reference /path/to/Qwen3.6-35B-A3B-MLX 16384
 
 # compare a target quantized model against it
-# mlx_kld.compare <target_model_path>
-uv run mlx_kld.compare /path/to/Qwen3.6-35B-A3B-MLX-oQ8
+# mlx_eval.compare <target_model_path>
+uv run mlx_eval.compare /path/to/Qwen3.6-35B-A3B-MLX-oQ8
 
 # cleanup when finished
 rm *.npy
@@ -56,7 +50,7 @@ rm *.npy
 ## Generate chart
 
 ```sh
-uv run results/Qwen3.6-35B-A3B.py
+uv run results/<model_name>.py
 ```
 
 ## Lint
