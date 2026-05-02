@@ -1,3 +1,4 @@
+import gc
 import sys
 
 import mlx.core
@@ -50,6 +51,7 @@ def main():
     ref_logits = ref_model(prompt)
 
     del ref_model
+    gc.collect()
     mlx.core.clear_cache()
 
     # convert logits to numerically stable log-probabilities along the vocabulary axis
