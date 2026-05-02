@@ -11,6 +11,7 @@ dependencies = [
 ]
 [dependency-groups]
 dev = [
+    "pytest>=9.0.3",
     "ruff>=0.15.12",
 ]
 
@@ -84,7 +85,9 @@ ignore = [
   # magic-value-comparison
   "PLR2004",
   # flake8-import-conventions
-  "ICN001"
+  "ICN001",
+  # too-many-arguments
+  "PLR0913"
 ]
 unfixable = [
   # unused-import
@@ -100,3 +103,6 @@ exclude = [
 
 [tool.ruff.lint.isort]
 force-single-line = true
+
+[tool.pytest.ini_options]
+filterwarnings = ["ignore::DeprecationWarning"]

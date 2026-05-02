@@ -8,17 +8,22 @@ import mlx_lm
 from . import const
 
 
-def main():
-    if len(sys.argv) != 3:
-        print("Usage: mlx_eval.reference <reference_model_path> <max_tokens>")
-        sys.exit(1)
-
-    ref_model_path = sys.argv[1]
-    max_tokens = int(sys.argv[2])
+def run_reference(
+    ref_model_path: str,
+    max_tokens: int,
+    source_prompt_file: str,
+    verbose: bool,
+) -> dict:
+    """
+    Run the reference model on the prompt and return log-probabilities,
+    tokenized prompt tensor, and reference perplexity as an MLX array.
+    """
 
     mlx.core.clear_cache()
 
-    print("Loading reference model...")
+    if verbose:
+        print("Loading reference model...")
+
     ref_model, ref_tokenizer, ref_config = mlx_lm.load(ref_model_path, return_config=True)
     ref_model_context = ref_config.get("max_position_embeddings")
 
@@ -32,8 +37,10 @@ def main():
     if max_tokens > ref_model_context:
         raise ValueError(f"max_tokens {max_tokens} > model max context {ref_model_context}")
 
-    print("Loading prompt...")
-    with open(const.SOURCE_PROMPT_FILE, encoding="utf-8") as f:
+    if verbose:
+        print("Loading prompt...")
+
+    with open(source_prompt_file, encoding="utf-8") as f:
         prompt_text = f.read()
 
     # tokenize prompt and truncate to max_tokens with no padding
@@ -46,7 +53,9 @@ def main():
     # add batch dimension (batch_size, max_tokens)
     prompt = mlx.core.array(token_ids)[None]
 
-    print("Calculating log-probabilities...")
+    if verbose:
+        print("Calculating log-probabilities...")
+
     # raw logits per token from forward pass over vocabulary (batch_size, max_tokens, vocab_size)
     ref_logits = ref_model(prompt)
 
@@ -57,7 +66,9 @@ def main():
     # convert logits to numerically stable log-probabilities along the vocabulary axis
     ref_log_probs = mlx.nn.log_softmax(ref_logits, axis=-1)
 
-    print("Calculating perplexity...")
+    if verbose:
+        print("Calculating perplexity...")
+
     # drop last token because there is no "next token" to predict
     shift_logits = ref_logits[:, :-1, :]
     # drop first token because there is no previous token to use as context for prediction
@@ -67,12 +78,33 @@ def main():
     # convert cross-entropy to perplexity
     ref_ppl = mlx.core.exp(cross_entropy).item()
 
-    print("Saving artifacts...")
-    mlx.core.save(const.LOGPROBS_FILE, ref_log_probs)
-    mlx.core.save(const.TOKENIZED_PROMPT_FILE, prompt)
-    mlx.core.save(const.PERPLEXITY_FILE, mlx.core.array(ref_ppl))
+    return {
+        "log_probs": ref_log_probs,
+        "prompt": prompt,
+        "perplexity": mlx.core.array(ref_ppl),
+    }
 
-    print(f"\nPPL mean: {ref_ppl:.6f}")
+def main():
+    if len(sys.argv) != 3:
+        print("Usage: mlx_eval.reference <reference_model_path> <max_tokens>")
+        sys.exit(1)
+
+    ref_model_path = sys.argv[1]
+    max_tokens = int(sys.argv[2])
+
+    log_probs, prompt_tensor, ppl_arr = run_reference(
+        ref_model_path=ref_model_path,
+        max_tokens=max_tokens,
+        source_prompt_file=const.SOURCE_PROMPT_FILE,
+        verbose=True,
+    )
+
+    print("Saving artifacts...")
+    mlx.core.save(const.LOGPROBS_FILE, log_probs)
+    mlx.core.save(const.TOKENIZED_PROMPT_FILE, prompt_tensor)
+    mlx.core.save(const.PERPLEXITY_FILE, ppl_arr)
+
+    print(f"\nPPL mean: {ppl_arr.item():.6f}")
 
 if __name__ == "__main__":
     main()

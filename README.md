@@ -53,9 +53,10 @@ rm *.npy
 uv run results/<model_name>.py
 ```
 
-## Lint
+## Lint and test
 
 ```sh
 uv sync --group dev
 uv run ruff check .
+uv run pytest .
 ```
