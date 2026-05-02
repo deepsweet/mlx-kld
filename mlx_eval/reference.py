@@ -1,4 +1,5 @@
 import gc
+import pathlib
 import sys
 
 import mlx.core
@@ -40,8 +41,7 @@ def run_reference(
     if verbose:
         print("Loading prompt...")
 
-    with open(source_prompt_file, encoding="utf-8") as f:
-        prompt_text = f.read()
+    prompt_text = pathlib.Path(source_prompt_file).read_text(encoding="utf-8")
 
     # tokenize prompt and truncate to max_tokens with no padding
     token_ids = ref_tokenizer.encode(prompt_text, truncation=True, max_length=max_tokens)
@@ -84,6 +84,7 @@ def run_reference(
         "perplexity": mlx.core.array(ref_ppl),
     }
 
+
 def main():
     if len(sys.argv) != 3:
         print("Usage: mlx_eval.reference <reference_model_path> <max_tokens>")
@@ -105,6 +106,7 @@ def main():
     mlx.core.save(const.PERPLEXITY_FILE, ppl_arr)
 
     print(f"\nPPL mean: {ppl_arr.item():.6f}")
+
 
 if __name__ == "__main__":
     main()

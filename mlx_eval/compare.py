@@ -70,5 +70,6 @@ def main():
     target_model_memory_gib = target_memory / (1024**3)
     print(f"RAM: {target_model_memory_gib:.2f}")
 
+
 if __name__ == "__main__":
     main()

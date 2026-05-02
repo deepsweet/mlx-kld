@@ -14,6 +14,7 @@ EXPECTED_LOGPROBS_ARR = [[[LOG_PROB_VALUE] * 10] * 4]
 EXPECTED_LOGPROBS = mlx.core.array(EXPECTED_LOGPROBS_ARR)
 EXPECTED_PPL = 10
 
+
 class UniformLogitModel(mlx.nn.Module):
     def __init__(self, vocab_size=10, embed_dim=4):
         super().__init__()
@@ -24,14 +25,18 @@ class UniformLogitModel(mlx.nn.Module):
         x = self.embed(x)
         return self.lm_head(x)
 
+
 def set_uniform_weights(model):
     model.embed.weight = mlx.core.zeros_like(model.embed.weight)
     model.lm_head.weight = mlx.core.zeros_like(model.lm_head.weight)
     model.lm_head.bias = mlx.core.zeros_like(model.lm_head.bias)
 
+
 class FixedTokenizer:
-    def encode(self, text, truncation=True, max_length=None): # noqa: ARG002
+    @staticmethod
+    def encode(text, truncation=True, max_length=None):  # noqa: ARG004
         return ([0, 1, 2, 3] * (max_length // 4 + 1))[:max_length]
+
 
 def test_run_reference(tmp_path):
     model = UniformLogitModel(vocab_size=10, embed_dim=4)

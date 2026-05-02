@@ -32,6 +32,7 @@ target-version = "py312"
 unsafe-fixes = true
 
 [tool.ruff.lint]
+preview = true
 # https://docs.astral.sh/ruff/rules/
 select = [
     # flake8-quotes
@@ -87,7 +88,9 @@ ignore = [
   # flake8-import-conventions
   "ICN001",
   # too-many-arguments
-  "PLR0913"
+  "PLR0913",
+  # too-many-locals
+  "PLR0914"
 ]
 unfixable = [
   # unused-import
