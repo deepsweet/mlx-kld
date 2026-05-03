@@ -1,4 +1,4 @@
-SOURCE_PROMPT_FILE = "prompt.txt"
-TOKENIZED_PROMPT_FILE = "prompt.npy"
-LOGPROBS_FILE = "logprobs.npy"
-PERPLEXITY_FILE = "perplexity.npy"
+SOURCE_PROMPT_PATH = "prompt.txt"
+TOKENIZED_PROMPT_PATH = "prompt.npy"
+REF_LOG_PROBS_PATH = "logprobs.npy"
+REF_PERPLEXITY_PATH = "perplexity.npy"
